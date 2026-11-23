@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Credential verification · TrustIssues</title>
+<style>body{font:16px system-ui;color:#172238;background:#f3f4f6}main{max-width:38rem;margin:8vh auto;padding:2rem;background:white;border-radius:12px}p,pre{overflow-wrap:anywhere;white-space:pre-wrap}label,button{display:block;margin:1rem 0}input{display:block;margin-top:.5rem}</style></head><body><main><h1>Credential verification</h1><h2 id="status" role="status">Checking credential…</h2><p id="message"></p><pre id="details"></pre><label>Compare a document<input type="file" id="original"></label><button id="download" hidden>Download shared evidence</button></main>
+<script src="/credential-ui.js"></script><script>
+const headers={Authorization:'Bearer '+location.hash.slice(1)};
+const statusEl=document.querySelector('#status'),msg=document.querySelector('#message'),details=document.querySelector('#details'),download=document.querySelector('#download');
+let checkedFileName='credential';let sequence=0;
+async function check(file){
+ const seq=++sequence;
+ try{
+ let suffix='';if(file){const hash=await crypto.subtle.digest('SHA-256',await file.arrayBuffer());suffix='?digest='+Array.from(new Uint8Array(hash),x=>x.toString(16).padStart(2,'0')).join('');}
+ const res=await fetch('/present/status'+suffix,{headers});const data=await res.json();if(seq!==sequence)return;
+ statusEl.textContent=outcomeNames[data.outcome] || 'Presentation unavailable';msg.textContent=data.message||data.error;
+ details.textContent=[data.credential_type,data.issuer_org,(data.skills||[]).join(", "),data.checked_at,data.ledger,data.transaction_id].filter(Boolean).join('\n');
+ checkedFileName=data.credential_type||'credential';download.hidden=!res.ok||data.outcome==='revoked';
+ }catch{if(seq===sequence){statusEl.textContent='Status unavailable';msg.textContent='Check the connection and retry.';details.textContent='';download.hidden=true;}}
+}
+download.onclick=async()=>{try{const r=await fetch('/present/evidence',{headers});if(!r.ok){await check();return;}const url=URL.createObjectURL(await r.blob());const a=document.createElement('a');a.href=url;a.download=checkedFileName;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}catch{msg.textContent='Download failed.';}};
+document.querySelector('#original').onchange=e=>check(e.target.files[0]);check();
+</script></body></html>

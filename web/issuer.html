@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Institution portal · TrustIssues</title><link rel="stylesheet" href="/student.css"><script defer src="/credential-ui.js"></script><script defer src="/portal.js"></script></head>
+<body data-role="issuer"><header><a class="brand logo" href="/issuer"><i>↗</i> TrustIssues</a><nav class="nav" aria-label="Workspace"><a class="pill" href="#pending">Pending review</a><a class="pill" href="#issued">Issued credentials</a></nav><div class="row"><button id="theme" class="btn ghost">Theme</button><form method="post" action="/logout"><button class="pill">Sign out</button></form></div></header><main><small>Institution portal</small><h1>Credential issuance</h1><p>Review submitted evidence and manage the credentials your institution has issued.</p>
+<div id="notice" role="status"></div><div class="bar"><div id="stats" class="chips" aria-live="polite"></div><button id="refresh" class="btn ghost">Refresh records</button></div>
+<div class="cards"><section id="pending" class="card"><h2>Pending review</h2><div id="queue">Loading submissions…</div></section>
+<section id="issued" class="card"><h2>Issued credentials</h2><div id="history">Loading records…</div></section></div></main></body></html>

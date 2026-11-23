@@ -1,0 +1,5 @@
+{
+  "fabric": "2.5.16",
+  "samples_commit": "5789681b4f4d",
+  "gateway_go": "v1.7.1"
+}
