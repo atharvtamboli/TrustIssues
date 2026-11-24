@@ -66,3 +66,29 @@ html{scroll-padding-top:16px}#result{overflow-wrap:anywhere}.feature{background:
 .lab-layout h3{margin-top:18px}.lab-layout .item h3{margin-top:0}.lab-layout button{white-space:normal;overflow-wrap:anywhere}
 .lab-toggle{display:flex;align-items:center;gap:9px;width:fit-content}.lab-toggle input[type=checkbox]{width:18px;height:18px}
 @media(max-width:760px){.lab-layout{grid-template-columns:1fr}}
+/* Role workspaces */
+:root { --solid:#145747; --on-solid:white; --screen1:#f4f6f1; --screen2:#edf2ed; --screen3:#f4f6f1; --glass:#fff; --stroke:#d6dfd8; --r-xl:16px }
+[data-theme=dark] { --solid:#a7edd0; --on-solid:#10291f; --screen1:#14231e; --glass:#1c2e27; --stroke:#354a40 }
+body { background:var(--screen1) }
+body:has(.tool-menu) header { background:#102e27;color:#f1fff8;align-items:stretch;justify-content:flex-start;flex-direction:column;gap:20px;padding:28px 18px;position:fixed;inset:0 auto 0 0;width:232px;overflow:auto;z-index:3 }
+header .brand {color:#fff} header .logo i {background:#b5f49b;color:#14362b}
+.workspace-role {font-size:13px;font-weight:650;color:#b5d2c4}
+.tool-menu summary {cursor:pointer;padding:10px;color:#daf6e3;font-weight:700}
+.tool-menu .nav {display:grid;background:none;border:0;padding:0;border-radius:0;gap:2px}
+.tool-menu .pill {display:block;border-radius:8px;color:#d6e8df;padding:10px 12px}
+.tool-menu .pill:hover,.tool-menu .pill[aria-current=page],.tool-menu .pill:focus-visible {background:#294e40;color:white}
+header .row {margin-top:auto;gap:8px} header .account {color:#c9dfd0}
+body:has(.tool-menu) main {margin-left:232px;max-width:1340px;padding:42px clamp(20px,4vw,60px) 80px}
+.skip-link {position:fixed;left:10px;top:-100px;z-index:10;background:white;color:#123;padding:12px}
+.skip-link:focus {top:8px}
+:focus-visible {outline:3px solid #ce850e;outline-offset:3px}
+@media(max-width:820px){
+ body:has(.tool-menu) header {position:static;width:auto;padding:14px 18px;display:flex;flex-direction:row;align-items:center;gap:12px;overflow:visible}
+ header .workspace-role {display:none} header .row {margin:0 0 0 auto}
+ .tool-menu {position:fixed;inset:auto 12px max(10px,env(safe-area-inset-bottom));z-index:5;background:#102e27;border-radius:14px;padding:4px 10px;box-shadow:0 4px 22px #15251c33}
+ .tool-menu summary {text-align:center;min-height:44px}
+ .tool-menu .nav {max-height:52dvh;overflow:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .tool-menu .pill {white-space:normal;min-height:44px}
+ body:has(.tool-menu) main {margin:0;padding:24px 16px 100px}
+}
+header .row form .pill { color:#e6f4ec; background:#284b3e; border:1px solid #648575; min-height:44px }

@@ -18,6 +18,30 @@ TrustIssues connects all three. Institutions review and issue credentials. Stude
 
 One Go executable serves the portals, stores encrypted evidence, and records credential events. Run it locally or connect it to a Hyperledger Fabric network.
 
+## Workspace tour
+
+Open **Workspace tools** to reach the actions available to your account. Desktop portals keep the tools in a sidebar. On phones the same menu opens from the bottom edge. Keyboard users can skip directly to the workspace and dismiss the mobile menu with Escape.
+
+### Student
+
+Switch between credentials, openings, eligibility checks, assessments, the skill planner and career guidance from the same menu.
+
+![Student overview and workspace navigation](docs/screenshots/student.webp)
+
+### Institution
+
+Review incoming evidence under **Pending review** and manage issued credentials under **Issued credentials**.
+
+![Institution review and issuance workspace](docs/screenshots/institution.webp)
+
+### Employer
+
+Check a reference, compare a document, open a presentation or move into hiring.
+
+![Employer verification and hiring tools](docs/screenshots/employer.webp)
+
+Screenshots use isolated demonstration accounts on the local ledger.
+
 ## Show your work
 
 | Students | Institutions | Employers |
