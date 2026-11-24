@@ -28,8 +28,18 @@ def main():
         env = dict(os.environ, GOOS=args.os, GOARCH=args.arch, CGO_ENABLED='0')
         subprocess.run(['go', 'build', '-trimpath', '-ldflags=-s -w',
                         '-o', str(stage / exe), '.'], cwd=ROOT, env=env, check=True)
-        for file in ['README.md', 'CHANGELOG.md', 'VERSION']:
-            shutil.copy2(ROOT / file, stage / file)
+        for file in ['README.md', 'CHANGELOG.md', 'VERSION', 'CONTRIBUTING.md', 'SECURITY.md',
+                     'docs/RELEASE_NOTES.md', 'docs/RELEASE_READINESS.md',
+                     'network/CREDENTIALS.md', 'network/README.md']:
+            source = ROOT / file
+            if source.is_file():
+                destination = stage / file
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, destination)
+        for source in (ROOT / 'docs' / 'screenshots').glob('*.webp'):
+            destination = stage / source.relative_to(ROOT)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
         shutil.copytree(ROOT / 'web', stage / 'web', ignore=shutil.ignore_patterns('*.html','*.js','*.css'))
         if args.os == 'windows':
             for file in ['Start-TrustIssues.ps1', 'Install-TrustIssues.ps1', 'Add-TrustIssuesUser.ps1']:
@@ -50,3 +60,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

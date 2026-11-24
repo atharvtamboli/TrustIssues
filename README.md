@@ -171,3 +171,5 @@ Regular pushes run checks on Windows and Linux. Package manager distribution and
 **Trust is earned. Proof is checked.**
 
 </div>
+
+[Pilot release readiness and deployment gates](docs/RELEASE_READINESS.md)
