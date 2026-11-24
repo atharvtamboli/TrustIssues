@@ -117,6 +117,7 @@ func (a *App) careerRoutes(r *gin.Engine, holder, employer gin.HandlerFunc) {
 		}
 		c.Redirect(303, "/verifier#hiring")
 	})
+	r.GET("/workspace-nav.js", asset("workspace-nav.js"))
 	r.GET("/student.css", asset("student.css"))
 	r.GET("/student.js", asset("student.js"))
 	r.GET("/skill-lab.js", asset("skill-lab.js"))
